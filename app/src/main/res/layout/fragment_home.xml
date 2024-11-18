@@ -33,7 +33,7 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/fredoka_medium"
+        android:fontFamily="@font/fredoka_semibold"
         android:text="Dzaki Amri"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -212,4 +212,27 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/recommendation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="Rekomendasi"
+        android:textSize="20sp"
+        android:fontFamily="@font/fredoka_medium"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/card_weight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_home"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recommendation" />
 </androidx.constraintlayout.widget.ConstraintLayout>
