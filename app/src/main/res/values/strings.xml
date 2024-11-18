@@ -5,5 +5,6 @@
     <string name="title_camera">Camera</string>
     <string name="title_tips">Tips</string>
     <string name="title_profile">Profile</string>
+    <string name="tips_menu">Tips</string>
     <string name="todo">TODO</string>
 </resources>
