@@ -1,4 +1,4 @@
-package com.example.eatwise.ui.tips
+package com.example.eatwise.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
