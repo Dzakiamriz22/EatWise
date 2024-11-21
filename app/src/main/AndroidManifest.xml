@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity" android:exported="true"/>
+        <activity android:name=".EditActivity"/>
+        <activity android:name=".FaqActivity"/>
+        <activity android:name=".AboutmeActivity"/>
     </application>
 </manifest>
