@@ -1,4 +1,4 @@
-package com.example.eatwise
+package com.example.eatwise.activity
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.eatwise.MainActivity
 import com.example.eatwise.R
 import kotlinx.coroutines.*
 

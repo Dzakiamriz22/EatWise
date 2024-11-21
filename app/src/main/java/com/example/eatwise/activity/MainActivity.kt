@@ -1,4 +1,4 @@
-package com.example.eatwise
+package com.example.eatwise.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.eatwise.R
 import com.example.eatwise.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

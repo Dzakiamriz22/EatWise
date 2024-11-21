@@ -6,9 +6,9 @@ import android.view.View
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.eatwise.AboutmeActivity
-import com.example.eatwise.EditActivity
-import com.example.eatwise.FaqActivity
+import com.example.eatwise.activity.AboutmeActivity
+import com.example.eatwise.activity.EditActivity
+import com.example.eatwise.activity.FaqActivity
 import com.example.eatwise.R
 import com.example.eatwise.databinding.FragmentProfileBinding
 
