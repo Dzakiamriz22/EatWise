@@ -62,13 +62,13 @@ class OnboardingActivity : AppCompatActivity() {
                 ),
                 OnboardingItem(
                     ivImage = R.drawable.hero,
-                    tvTitle = "Selamat Datang di EatWise",
-                    tvDesc = "Bersama EatWise, langkah pertama menuju hidup sehat lebih mudah! Mulailah perjalanan kesehatan Anda dengan alat cerdas untuk memahami kebutuhan nutrisi Anda."
+                    tvTitle = "Analisis Nutrisi Real-Time",
+                    tvDesc = "Gunakan teknologi AI canggih kami untuk memindai makanan Anda dan dapatkan informasi kalori serta nutrisi secara instan!"
                 ),
                 OnboardingItem(
                     ivImage = R.drawable.hero,
-                    tvTitle = "Selamat Datang di EatWise",
-                    tvDesc = "Bersama EatWise, langkah pertama menuju hidup sehat lebih mudah! Mulailah perjalanan kesehatan Anda dengan alat cerdas untuk memahami kebutuhan nutrisi Anda."
+                    tvTitle = "Rekomendasi Gizi Personal",
+                    tvDesc = "Dapatkan saran nutrisi yang disesuaikan dengan kebutuhan dan tujuan kesehatan Anda, dari menurunkan berat badan hingga meningkatkan vitalitas."
                 )
             )
         )
