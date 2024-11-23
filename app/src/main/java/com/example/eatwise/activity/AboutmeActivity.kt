@@ -1,8 +1,9 @@
-package com.example.eatwise
+package com.example.eatwise.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.eatwise.R
 import com.example.eatwise.databinding.ActivityAboutmeBinding
 
 class AboutmeActivity : AppCompatActivity(R.layout.activity_aboutme) {

@@ -58,5 +58,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation (libs.androidx.viewpager2)
     kapt(libs.androidx.room.compiler)
+    implementation ("androidx.collection:collection-ktx:1.4.5")
 }
