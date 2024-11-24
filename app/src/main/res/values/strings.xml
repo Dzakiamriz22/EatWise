@@ -7,4 +7,5 @@
     <string name="title_profile">Profile</string>
     <string name="tips_menu">Tips</string>
     <string name="todo">TODO</string>
+    <string name="default_web_client_id">814148574453</string>
 </resources>

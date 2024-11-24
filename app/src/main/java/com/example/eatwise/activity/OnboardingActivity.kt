@@ -33,7 +33,7 @@ class OnboardingActivity : AppCompatActivity() {
             setContentView(R.layout.activity_onboarding)
             initializeOnboarding()
         } else {
-            navigateToMain()
+            navigateToSignin()
         }
     }
 
@@ -91,18 +91,18 @@ class OnboardingActivity : AppCompatActivity() {
             if (onboardingViewPager.currentItem + 1 < onboardingItemAdapter.itemCount) {
                 onboardingViewPager.currentItem += 1
             } else {
-                navigateToMain()
+                navigateToSignin()
             }
         }
 
         findViewById<Button>(R.id.btnSkip).setOnClickListener {
-            navigateToMain()
+            navigateToSignin()
         }
     }
 
-    private fun navigateToMain() {
+    private fun navigateToSignin() {
         setOnboardingShown()
-        startActivity(Intent(applicationContext, MainActivity::class.java))
+        startActivity(Intent(this, SigninActivity::class.java))
         finish()
     }
 

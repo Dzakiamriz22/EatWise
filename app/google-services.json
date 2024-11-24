@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "814148574453",
+    "project_id": "eatwise-52a34",
+    "storage_bucket": "eatwise-52a34.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:814148574453:android:fee3ce2ed45c0bca4ff9bc",
+        "android_client_info": {
+          "package_name": "com.example.eatwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "814148574453-bni4anbis5v4nabejelot24t5seom4rj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eatwise",
+            "certificate_hash": "787cb61da09d2453b6bba141a33f4b8daaa8cb7c"
+          }
+        },
+        {
+          "client_id": "814148574453-ru3lgqs4l017ujrfvvig1g1ftv8g1ct8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAqAeDL_G8VsckscnvPOZZUC6-FVMV5kg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "814148574453-ru3lgqs4l017ujrfvvig1g1ftv8g1ct8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

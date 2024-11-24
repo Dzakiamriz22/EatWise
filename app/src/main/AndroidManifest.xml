@@ -23,17 +23,15 @@
             </intent-filter>
         </activity>
 
-        <!-- Onboarding Activity -->
         <activity
             android:name=".activity.OnboardingActivity"
             android:exported="true"/>
 
-        <!-- Main/Home Activity -->
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"/>
 
-        <!-- Aktivitas tambahan lainnya -->
+        <activity android:name=".activity.SigninActivity"/>
         <activity android:name=".activity.EditActivity"/>
         <activity android:name=".activity.FaqActivity"/>
         <activity android:name=".activity.AboutmeActivity"/>
