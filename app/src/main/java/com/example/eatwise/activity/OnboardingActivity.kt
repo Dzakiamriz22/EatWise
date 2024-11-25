@@ -28,7 +28,6 @@ class OnboardingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if (isFirstTimeLaunching()) {
             setContentView(R.layout.activity_onboarding)
             initializeOnboarding()
@@ -52,7 +51,6 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun initializeOnboarding() {
         val onboardingViewPager = findViewById<ViewPager2>(R.id.vp_onboarding)
-
         onboardingItemAdapter = OnboardingItemAdapter(
             listOf(
                 OnboardingItem(
@@ -75,7 +73,6 @@ class OnboardingActivity : AppCompatActivity() {
 
         onboardingViewPager.adapter = onboardingItemAdapter
         setupIndicators()
-
         onboardingViewPager.registerOnPageChangeCallback(object :
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
