@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         mAuth = FirebaseAuth.getInstance()
         val user = mAuth.currentUser
         if (user == null) {
@@ -32,21 +31,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportActionBar?.hide()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
-
         val colorStateList = ContextCompat.getColorStateList(this, R.drawable.nav_item_color)
         navView.itemIconTintList = colorStateList
     }
 
     private fun signOutAndStartSignInActivity() {
         mAuth.signOut()
-
         val intent = Intent(this@MainActivity, SigninActivity::class.java)
         startActivity(intent)
         finish()
