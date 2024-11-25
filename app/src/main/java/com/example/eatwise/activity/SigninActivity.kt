@@ -71,6 +71,7 @@ class SigninActivity : AppCompatActivity() {
                     val sharedPreferences = getSharedPreferences("AppPreferences", MODE_PRIVATE)
                     val editor = sharedPreferences.edit()
                     editor.putString("username", user?.displayName)
+                    editor.putString("email", user?.email)
                     editor.apply()
 
                     val intent = Intent(this, MainActivity::class.java)
