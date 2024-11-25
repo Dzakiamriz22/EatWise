@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
     kotlin("kapt")
 }
 
@@ -60,5 +61,8 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation (libs.androidx.viewpager2)
     kapt(libs.androidx.room.compiler)
-    implementation ("androidx.collection:collection-ktx:1.4.5")
+    implementation (libs.androidx.collection.ktx)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
 }
