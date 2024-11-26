@@ -1,22 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     tools:context=".ui.camera.CameraFragment">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <!-- Action Bar -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Camera Icon -->
+        <ImageView
+            android:id="@+id/action_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="camera_icon"
+            android:src="@drawable/camera_black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Action Text -->
+        <TextView
+            android:id="@+id/action_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kamera"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:fontFamily="@font/fredoka_semibold"
+            app:layout_constraintStart_toEndOf="@id/action_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="12dp" />
+
+        <!-- Logo -->
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="logo_icon"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Camera Preview -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/camera_preview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/grey"
+        app:layout_constraintTop_toBottomOf="@id/action_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/camera_buttons"
+        app:layout_constraintDimensionRatio="H,16:9" />
+
+    <!-- Camera Buttons -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/camera_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Camera Button Background -->
+        <View
+            android:id="@+id/camera_button_bg"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/circle_grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Camera Button -->
+        <ImageView
+            android:id="@+id/camera_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/camera_black"
+            android:contentDescription="open_camera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/green" />
+
+        <!-- Left Button Background -->
+        <View
+            android:id="@+id/left_button_bg"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/circle_grey"
+            app:layout_constraintEnd_toStartOf="@id/camera_button_bg"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Gallery Button -->
+        <ImageView
+            android:id="@+id/gallery_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="open_gallery"
+            app:layout_constraintEnd_toEndOf="@id/left_button_bg"
+            app:layout_constraintStart_toStartOf="@id/left_button_bg"
+            app:layout_constraintTop_toTopOf="@id/left_button_bg"
+            app:layout_constraintBottom_toBottomOf="@id/left_button_bg"
+            app:tint="@color/black" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 [versions]
 agp = "8.4.1"
+cameraViewVersion = "1.5.0-alpha01"
+cameraxVersion = "1.5.0-alpha01"
 constraintlayoutVersion = "2.1.4"
 coreKtxVersion = "1.13.1"
 glide = "4.16.0"
@@ -23,8 +25,13 @@ roomRuntime = "2.6.1"
 roomKtx = "2.6.1"
 ucrop = "2.2.8"
 viewbindingpropertydelegateNoreflection = "1.5.9"
+cameraView = "1.4.0"
 
 [libraries]
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraxVersion" }
+androidx-camera-core = { module = "androidx.camera:camera-core", version.ref = "cameraxVersion" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "cameraxVersion" }
+androidx-camera-view-v150alpha01 = { module = "androidx.camera:camera-view", version.ref = "cameraViewVersion" }
 androidx-constraintlayout-v214 = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayoutVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-ktx-v1131 = { module = "androidx.core:core-ktx", version.ref = "coreKtxVersion" }
@@ -50,6 +57,7 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 viewbindingpropertydelegate-noreflection = { module = "com.github.kirich1409:viewbindingpropertydelegate-noreflection", version.ref = "viewbindingpropertydelegateNoreflection" }
+androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "cameraView" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
