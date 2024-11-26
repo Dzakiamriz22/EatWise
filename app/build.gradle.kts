@@ -1,7 +1,8 @@
 plugins {
-    alias(libs.plugins.android.application) // Plugin untuk aplikasi Android
-    alias(libs.plugins.jetbrains.kotlin.android) // Plugin Kotlin untuk Android
-    kotlin("kapt") // Plugin Kapt untuk annotation processing
+    alias(libs.plugins.android.application) 
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.gms.google.services)
+    kotlin("kapt")
 }
 
 android {
@@ -81,4 +82,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Additional Libraries (from the second part of the conflict)
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.androidx.collection.ktx)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.play.services.auth)
 }

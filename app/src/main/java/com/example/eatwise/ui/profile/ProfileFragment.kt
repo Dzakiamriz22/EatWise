@@ -1,14 +1,15 @@
 package com.example.eatwise.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.eatwise.AboutmeActivity
-import com.example.eatwise.EditActivity
-import com.example.eatwise.FaqActivity
+import com.example.eatwise.activity.AboutmeActivity
+import com.example.eatwise.activity.EditActivity
+import com.example.eatwise.activity.FaqActivity
 import com.example.eatwise.R
 import com.example.eatwise.databinding.FragmentProfileBinding
 
@@ -17,6 +18,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val sharedPreferences = requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val userName = sharedPreferences.getString("username", "User Default")
+        val email = sharedPreferences.getString("email", "example@email.com")
+
+        binding.textUsername.text = userName
+        binding.textEmail.text = email
 
         val cardViewMap = mapOf(
             R.id.edit to EditActivity::class.java,

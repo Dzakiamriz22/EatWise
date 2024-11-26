@@ -7,6 +7,9 @@
     <string name="title_profile">Profile</string>
     <string name="tips_menu">Tips</string>
     <string name="todo">TODO</string>
+    <string name="default_web_client_id">814148574453</string>
     <string name="tips_image">TipsImage</string>
     <string name="tips_title">Lorem ipsum dolor sit amet,\nconsectetur adipiscing elit.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

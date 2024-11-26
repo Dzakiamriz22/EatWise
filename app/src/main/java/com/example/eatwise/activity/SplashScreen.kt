@@ -1,4 +1,4 @@
-package com.example.eatwise
+package com.example.eatwise.activity
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.eatwise.MainActivity
 import com.example.eatwise.R
 import kotlinx.coroutines.*
 
@@ -34,7 +33,7 @@ class SplashScreen : AppCompatActivity() {
                 name.visibility = View.VISIBLE
                 scope.launch {
                     displayTextOneByOne(name, "EatWise")
-                    navigateToMainActivity()
+                    navigateToNextActivity()
                 }
             }
 
@@ -50,14 +49,24 @@ class SplashScreen : AppCompatActivity() {
         }
     }
 
-    private fun navigateToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
+    private fun navigateToNextActivity() {
+        // Cek apakah onboarding telah selesai
+        val sharedPreferences = getSharedPreferences("OnboardingPrefs", MODE_PRIVATE)
+        val onboardingCompleted = sharedPreferences.getBoolean("OnboardingCompleted", false)
+
+        val nextActivity = if (onboardingCompleted) {
+            MainActivity::class.java // Navigasi ke MainActivity yang menampilkan HomeFragment
+        } else {
+            OnboardingActivity::class.java // Navigasi ke Onboarding jika belum selesai
+        }
+
+        val intent = Intent(this, nextActivity)
         startActivity(intent)
-        finish()
+        finish() // Mengakhiri SplashScreen
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        scope.cancel()
+        scope.cancel() // Pastikan coroutine dihentikan saat activity dihancurkan
     }
 }
