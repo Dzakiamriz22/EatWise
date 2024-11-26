@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,9 +18,9 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_bg_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar"
-        tools:targetApi="31">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
 
+        <!-- SplashScreen Activity -->
         <activity
             android:name=".activity.SplashScreen"
             android:exported="true"
@@ -23,17 +31,21 @@
             </intent-filter>
         </activity>
 
+        <!-- Onboarding Activity -->
         <activity
             android:name=".activity.OnboardingActivity"
             android:exported="true"/>
 
+        <!-- Main Activity -->
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"/>
 
+        <!-- Other Activities -->
         <activity android:name=".activity.SigninActivity"/>
         <activity android:name=".activity.EditActivity"/>
         <activity android:name=".activity.FaqActivity"/>
         <activity android:name=".activity.AboutmeActivity"/>
+
     </application>
 </manifest>
