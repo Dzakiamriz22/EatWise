@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eatwise.databinding.ItemCardBinding
+import com.example.eatwise.databinding.ItemRecommendationBinding
 
 class HomeAdapter : ListAdapter<Int, HomeAdapter.HomeViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val binding = ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemRecommendationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HomeViewHolder(binding)
     }
 
@@ -18,7 +19,7 @@ class HomeAdapter : ListAdapter<Int, HomeAdapter.HomeViewHolder>(DiffCallback())
         holder.bind(getItem(position))
     }
 
-    class HomeViewHolder(private val binding: ItemCardBinding) :
+    class HomeViewHolder(private val binding: ItemRecommendationBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(tip: Int) {
