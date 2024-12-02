@@ -57,7 +57,7 @@ class SplashScreen : AppCompatActivity() {
         val nextActivity = if (onboardingCompleted) {
             MainActivity::class.java // Navigasi ke MainActivity yang menampilkan HomeFragment
         } else {
-            OnboardingActivity::class.java // Navigasi ke Onboarding jika belum selesai
+            MainActivity::class.java // Navigasi ke Onboarding jika belum selesai
         }
 
         val intent = Intent(this, nextActivity)
