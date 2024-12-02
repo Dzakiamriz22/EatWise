@@ -71,6 +71,7 @@ dependencies {
     // Room Database
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.activity)
     kapt(libs.androidx.room.compiler)
 
     // Coroutines for Asynchronous Programming

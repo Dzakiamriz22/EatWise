@@ -127,5 +127,4 @@
             app:layout_constraintBottom_toBottomOf="@id/left_button_bg"
             app:tint="@color/black" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
