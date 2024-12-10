@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.eatwise.R
+import com.example.eatwise.ui.authentication.SignupActivity
 import kotlinx.coroutines.*
 
 class SplashScreen : AppCompatActivity() {
@@ -50,23 +51,30 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun navigateToNextActivity() {
-        // Cek apakah onboarding telah selesai
-        val sharedPreferences = getSharedPreferences("OnboardingPrefs", MODE_PRIVATE)
-        val onboardingCompleted = sharedPreferences.getBoolean("OnboardingCompleted", false)
+        val sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE)
 
-        val nextActivity = if (onboardingCompleted) {
-            MainActivity::class.java // Navigasi ke MainActivity yang menampilkan HomeFragment
-        } else {
-            MainActivity::class.java // Navigasi ke Onboarding jika belum selesai
+        val onboardingCompleted = sharedPreferences.getBoolean("OnboardingCompleted", false)
+        val userSignedUp = sharedPreferences.getBoolean("UserSignedUp", false)
+
+        val nextActivity = when {
+            !onboardingCompleted -> {
+                OnboardingActivity::class.java
+            }
+            !userSignedUp -> {
+                SignupActivity::class.java
+            }
+            else -> {
+                MainActivity::class.java
+            }
         }
 
         val intent = Intent(this, nextActivity)
         startActivity(intent)
-        finish() // Mengakhiri SplashScreen
+        finish()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        scope.cancel() // Pastikan coroutine dihentikan saat activity dihancurkan
+        scope.cancel()
     }
 }
