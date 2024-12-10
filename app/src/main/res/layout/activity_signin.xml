@@ -94,7 +94,6 @@
         app:layout_constraintTop_toBottomOf="@id/layout_password_input"/>
 
     <LinearLayout
-        android:id="@+id/signin_google"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -111,6 +110,7 @@
             android:src="@drawable/google" />
 
         <Button
+            android:id="@+id/signin_google"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue"

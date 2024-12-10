@@ -13,17 +13,28 @@ import com.example.eatwise.activity.EditActivity
 import com.example.eatwise.activity.FaqActivity
 import com.example.eatwise.activity.SigninActivity
 import com.example.eatwise.databinding.FragmentProfileBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val binding by viewBinding(FragmentProfileBinding::bind)
     private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Inisialisasi FirebaseAuth
         auth = FirebaseAuth.getInstance()
+
+        // Inisialisasi GoogleSignInClient
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
         // Ambil data username dan email dari SharedPreferences
         val sharedPreferences = requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
@@ -37,10 +48,16 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         // Logout
         binding.logout.setOnClickListener {
             if (auth.currentUser != null) {
+                // Logout dari Firebase
                 auth.signOut()
-                val intent = Intent(requireContext(), SigninActivity::class.java)
-                startActivity(intent)
-                requireActivity().finish()
+
+                // Logout dari Google
+                googleSignInClient.signOut().addOnCompleteListener {
+                    // Setelah logout, arahkan ke SigninActivity
+                    val intent = Intent(requireContext(), SigninActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
+                }
             }
         }
 
