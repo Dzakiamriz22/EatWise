@@ -203,7 +203,7 @@
             android:gravity="center"
             android:textColor="@color/green"
             android:textSize="16sp"
-            android:text="Apakah kamu sudah mempunyai akun? " />
+            android:text="Apakah kamu sudah mempunyai akun?" />
 
         <TextView
             android:id="@+id/btn_register_label"
