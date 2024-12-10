@@ -32,14 +32,16 @@ class TipsFragment : Fragment() {
 
         val adapter = TipsAdapter { tip ->
             val intent = Intent(requireContext(), DetailTipsActivity::class.java)
+            intent.putExtra("TIP_TITLE", tip.title)
             intent.putExtra("TIP_CONTENT", tip.content)
+            intent.putExtra("TIP_IMAGE_URL", tip.image_url)
+            intent.putExtra("TIP_TIMESTAMP", tip.timestamp)
             startActivity(intent)
         }
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
 
-        // Add progress bar and error text view to your fragment_tips.xml
         tipsViewModel.tipsList.observe(viewLifecycleOwner) { tips ->
             binding.progressBar.visibility = View.GONE
             if (tips.isNullOrEmpty()) {

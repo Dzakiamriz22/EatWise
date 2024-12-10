@@ -29,6 +29,9 @@ class TipsAdapter(private val onTipClick: (Article) -> Unit) :
 
         fun bind(article: Article) {
             binding.tipTextView.text = article.title
+
+            binding.tipDescriptionTextView.text = article.description
+
             Glide.with(binding.root.context)
                 .load(article.image_url)
                 .placeholder(R.drawable.sample_image)
