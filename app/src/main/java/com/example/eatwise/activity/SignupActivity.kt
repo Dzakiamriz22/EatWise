@@ -1,4 +1,4 @@
-package com.example.eatwise.ui.authentication
+package com.example.eatwise.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding

@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.eatwise.R
-import com.example.eatwise.ui.authentication.SignupActivity
 import kotlinx.coroutines.*
 
 class SplashScreen : AppCompatActivity() {
