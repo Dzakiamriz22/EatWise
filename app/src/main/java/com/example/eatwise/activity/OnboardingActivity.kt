@@ -19,6 +19,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.eatwise.R
 import com.example.eatwise.adapter.OnboardingItemAdapter
 import com.example.eatwise.data.OnboardingItem
+import com.example.eatwise.ui.authentication.SignupActivity
 import com.example.eatwise.ui.home.HomeFragment
 
 class OnboardingActivity : AppCompatActivity() {
@@ -99,7 +100,7 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun navigateToSignin() {
         setOnboardingShown()
-        startActivity(Intent(this, SigninActivity::class.java))
+        startActivity(Intent(this, SignupActivity::class.java))
         finish()
     }
 
