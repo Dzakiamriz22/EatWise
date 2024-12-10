@@ -1,16 +1,17 @@
 package com.example.eatwise.adapter
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.eatwise.R
+import com.example.eatwise.data.Article
 import com.example.eatwise.databinding.ItemCardBinding
-import com.example.eatwise.activity.DetailTipsActivity
 
-class TipsAdapter(private val onTipClick: (String) -> Unit) : ListAdapter<String, TipsAdapter.TipsViewHolder>(DiffCallback()) {
+class TipsAdapter(private val onTipClick: (Article) -> Unit) :
+    ListAdapter<Article, TipsAdapter.TipsViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TipsViewHolder {
         val binding = ItemCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -23,25 +24,30 @@ class TipsAdapter(private val onTipClick: (String) -> Unit) : ListAdapter<String
 
     class TipsViewHolder(
         private val binding: ItemCardBinding,
-        private val onTipClick: (String) -> Unit
+        private val onTipClick: (Article) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(tip: String) {
-            binding.tipTextView.text = tip
+        fun bind(article: Article) {
+            binding.tipTextView.text = article.title
 
-            // Set up click listener
-            itemView.setOnClickListener {
-                onTipClick(tip)  // Call the click listener and pass the tip
-            }
+            binding.tipDescriptionTextView.text = article.description
+
+            Glide.with(binding.root.context)
+                .load(article.image_url)
+                .placeholder(R.drawable.sample_image)
+                .error(R.drawable.sample_image)
+                .into(binding.imageView)
+
+            itemView.setOnClickListener { onTipClick(article) }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<String>() {
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
+    class DiffCallback : DiffUtil.ItemCallback<Article>() {
+        override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem == newItem
         }
     }

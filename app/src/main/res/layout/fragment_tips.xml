@@ -12,12 +12,10 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:gravity="center_vertical">
-
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/tips_black" />
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -28,16 +26,31 @@
             android:textSize="24sp"
             android:paddingStart="8dp"
             android:textStyle="bold" />
-
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/logo" />
     </LinearLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/errorTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp" />
+        android:padding="8dp"
+        android:clipToPadding="false" />
 </LinearLayout>

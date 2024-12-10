@@ -2,15 +2,16 @@ package com.example.eatwise.ui.tips
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.eatwise.activity.DetailTipsActivity
 import com.example.eatwise.adapter.TipsAdapter
 import com.example.eatwise.databinding.FragmentTipsBinding
-import com.example.eatwise.activity.DetailTipsActivity
 
 class TipsFragment : Fragment() {
 
@@ -30,9 +31,11 @@ class TipsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = TipsAdapter { tip ->
-            // When a tip is clicked, start DetailTipsActivity
             val intent = Intent(requireContext(), DetailTipsActivity::class.java)
-            intent.putExtra("TIP_CONTENT", tip) // Pass the clicked tip's content to the DetailTipsActivity
+            intent.putExtra("TIP_TITLE", tip.title)
+            intent.putExtra("TIP_CONTENT", tip.content)
+            intent.putExtra("TIP_IMAGE_URL", tip.image_url)
+            intent.putExtra("TIP_TIMESTAMP", tip.timestamp)
             startActivity(intent)
         }
 
@@ -40,7 +43,20 @@ class TipsFragment : Fragment() {
         binding.recyclerView.adapter = adapter
 
         tipsViewModel.tipsList.observe(viewLifecycleOwner) { tips ->
-            adapter.submitList(tips)
+            binding.progressBar.visibility = View.GONE
+            if (tips.isNullOrEmpty()) {
+                binding.errorTextView.visibility = View.VISIBLE
+                binding.errorTextView.text = "No articles found or error occurred"
+                Log.e("TipsFragment", "Article list is empty or null")
+            } else {
+                binding.errorTextView.visibility = View.GONE
+                adapter.submitList(tips)
+                Log.d("TipsFragment", "Articles loaded: ${tips.size}")
+            }
+        }
+
+        tipsViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
     }
 
