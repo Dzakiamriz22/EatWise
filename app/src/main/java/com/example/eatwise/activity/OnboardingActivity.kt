@@ -100,7 +100,7 @@ class OnboardingActivity : AppCompatActivity() {
 
     private fun navigateToSignin() {
         setOnboardingShown()
-        startActivity(Intent(this, SignupActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 

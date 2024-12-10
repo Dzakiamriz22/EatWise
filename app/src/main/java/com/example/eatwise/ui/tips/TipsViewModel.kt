@@ -1,19 +1,39 @@
 package com.example.eatwise.ui.tips
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.util.Log
+import androidx.lifecycle.*
+import com.example.eatwise.data.Article
+import com.example.eatwise.network.ApiClient
+import kotlinx.coroutines.launch
 
 class TipsViewModel : ViewModel() {
 
-    private val _tipsList = MutableLiveData<List<String>>().apply {
-        value = listOf(
-            "Tip 1: Lorem ipsum dolor sit amet",
-            "Tip 2: Consectetur adipiscing elit",
-            "Tip 3: Sed do eiusmod tempor incididunt",
-            "Tip 4: Sed do eiusmod temper incididunt",
-            "Tip 5: Sed do eiusmod tempor incididunt",
-        )
+    private val _tipsList = MutableLiveData<List<Article>>()
+    val tipsList: LiveData<List<Article>> = _tipsList
+
+    // Add MutableLiveData for loading state
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    init {
+        fetchArticles()
     }
-    val tipsList: LiveData<List<String>> = _tipsList
+
+    private fun fetchArticles() {
+        _isLoading.value = true
+        viewModelScope.launch {
+            try {
+                val articleList = ApiClient.apiService.getArticle()
+                Log.d("TipsViewModel", "Fetched Articles: ${articleList.size}")
+                Log.d("TipsViewModel", "First Article: ${articleList.firstOrNull()}")
+                _tipsList.postValue(articleList)
+            } catch (e: Exception) {
+                Log.e("TipsViewModel", "Error fetching articles", e)
+                // Consider adding error handling
+                _tipsList.postValue(emptyList())
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
 }
