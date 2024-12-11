@@ -42,7 +42,6 @@ class SignupActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // User created successfully
                         Toast.makeText(this, "User account created successfully", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     } else {
                         // User creation failed

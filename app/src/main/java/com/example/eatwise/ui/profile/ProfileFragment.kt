@@ -2,8 +2,10 @@ package com.example.eatwise.ui.profile
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -21,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private val binding by viewBinding(FragmentProfileBinding::bind)
     private lateinit var auth: FirebaseAuth
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,6 +31,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         // Inisialisasi FirebaseAuth
         auth = FirebaseAuth.getInstance()
+        sharedPreferences = requireActivity().getSharedPreferences("Eatwise", AppCompatActivity.MODE_PRIVATE)
 
         // Inisialisasi GoogleSignInClient
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -36,28 +40,16 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             .build()
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-        // Ambil data username dan email dari SharedPreferences
-        val sharedPreferences = requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
-        val userName = sharedPreferences.getString("username", "User Default")
-        val email = sharedPreferences.getString("email", "example@email.com")
-
-        // Set username dan email ke TextView
-        binding.textUsername.text = userName
-        binding.textEmail.text = email
-
         // Logout
         binding.logout.setOnClickListener {
-            if (auth.currentUser != null) {
-                // Logout dari Firebase
-                auth.signOut()
+            auth.signOut()
 
-                // Logout dari Google
-                googleSignInClient.signOut().addOnCompleteListener {
-                    // Setelah logout, arahkan ke SigninActivity
-                    val intent = Intent(requireContext(), SigninActivity::class.java)
-                    startActivity(intent)
-                    requireActivity().finish()
-                }
+            // Logout dari Google
+            googleSignInClient.signOut().addOnCompleteListener {
+                // Setelah logout, arahkan ke SigninActivity
+                val intent = Intent(requireContext(), SigninActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
             }
         }
 
@@ -74,5 +66,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 startActivity(intent)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.textUsername.text = sharedPreferences.getString("name", "")
+        binding.textEmail.text = sharedPreferences.getString("email", "")
     }
 }
