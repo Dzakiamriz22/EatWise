@@ -63,29 +63,24 @@
                 android:paddingVertical="24dp"
                 android:paddingHorizontal="32dp">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/bmi_result"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/imgHero">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Lorem ipsum dolor sit amet, "
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:fontFamily="@font/fredoka_medium"/>
+                    android:text="BMI: XX.XX"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:fontFamily="@font/fredoka_medium"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Lorem ipsum dolor sit amet, "
-                        android:textColor="@color/white"
-                        android:textSize="18sp"/>
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/bmi_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BMI Description"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintTop_toBottomOf="@id/bmi_result"/>
 
                 <ImageView
                     android:id="@+id/imgHero"
@@ -115,36 +110,30 @@
                 android:paddingVertical="24dp"
                 android:paddingHorizontal="24dp">
 
-                <ImageButton
-                    android:id="@+id/point_high"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/point"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
                     android:id="@+id/high"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/fredoka_medium"
+                    android:text="@string/height"
                     android:textAlignment="textEnd"
-                    android:text="Tinggi"
                     android:textColor="@color/white"
                     android:textSize="24sp"
-                    android:fontFamily="@font/fredoka_medium"
-                    app:layout_constraintTop_toBottomOf="@id/point_high"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="30dp"
+                    tools:ignore="MissingConstraints" />
 
-                <TextView
-                    android:id="@+id/high_content"
+                <EditText
+                    android:id="@+id/et_height"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
-                    android:text="175 cm"
+                    android:hint="175"
+                    android:inputType="numberDecimal"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:fontFamily="@font/fredoka_medium"
+                    android:background="@android:color/transparent"
                     app:layout_constraintTop_toBottomOf="@id/high"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -152,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/high"
-                    app:layout_constraintTop_toBottomOf="@id/high_content"
+                    app:layout_constraintTop_toBottomOf="@id/et_height"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -175,36 +164,30 @@
                 android:paddingVertical="24dp"
                 android:paddingHorizontal="24dp">
 
-                <ImageButton
-                    android:id="@+id/point_weight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/point"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
                     android:id="@+id/weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/fredoka_medium"
+                    android:text="Weight"
                     android:textAlignment="textEnd"
-                    android:text="Berat"
                     android:textColor="@color/white"
                     android:textSize="24sp"
-                    android:fontFamily="@font/fredoka_medium"
-                    app:layout_constraintTop_toBottomOf="@id/point_weight"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="30dp"
+                    tools:ignore="MissingConstraints" />
 
-                <TextView
-                    android:id="@+id/weight_content"
+                <EditText
+                    android:id="@+id/et_weight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="textEnd"
-                    android:text="65 kg"
+                    android:hint="65"
+                    android:inputType="numberDecimal"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:fontFamily="@font/fredoka_medium"
+                    android:background="@android:color/transparent"
                     app:layout_constraintTop_toBottomOf="@id/weight"
                     app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -212,7 +195,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/weight"
-                    app:layout_constraintTop_toBottomOf="@id/weight_content"
+                    app:layout_constraintTop_toBottomOf="@id/et_weight"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -224,7 +207,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="4dp"
-            android:text="Rekomendasi"
+            android:text="Recommendation"
             android:textSize="20sp"
             android:fontFamily="@font/fredoka_medium"
             android:textColor="@color/black"

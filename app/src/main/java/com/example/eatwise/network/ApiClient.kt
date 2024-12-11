@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "http://34.128.110.142:5000/"
+    private const val BASE_URL = "http://34.128.110.142:5000"
 
     val apiService: EatWiseApiService by lazy {
         val logging = HttpLoggingInterceptor().apply {
