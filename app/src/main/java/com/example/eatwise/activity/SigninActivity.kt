@@ -2,13 +2,20 @@ package com.example.eatwise.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.eatwise.R
+import com.example.eatwise.data.User
+import com.example.eatwise.data.repository.UserRepository
 import com.example.eatwise.databinding.ActivitySigninBinding
+import com.example.eatwise.network.ApiClient
+import com.example.eatwise.ui.profile.ProfileViewModel
+import com.example.eatwise.viewmodel.UserViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -22,6 +29,11 @@ class SigninActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySigninBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var sharedPreferences: SharedPreferences
+    private val profileViewModel by lazy {
+        val factory = UserViewModelFactory(UserRepository(ApiClient.apiService))
+        ViewModelProvider(this,factory)[ProfileViewModel::class.java]
+    }
 
     // Launcher for Google Sign-In
     private val googleSignInLauncher =
@@ -38,6 +50,8 @@ class SigninActivity : AppCompatActivity() {
         // Initialize ViewBinding
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        sharedPreferences = getSharedPreferences("Eatwise", MODE_PRIVATE)
 
         // Initialize FirebaseAuth
         auth = FirebaseAuth.getInstance()
@@ -57,7 +71,6 @@ class SigninActivity : AppCompatActivity() {
         // Set up click listeners
         binding.tvSignup.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
-            finish()
         }
 
         binding.tvSignin.setOnClickListener {
@@ -77,6 +90,22 @@ class SigninActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        val editor = sharedPreferences.edit()
+                        editor.putString("uid", auth.currentUser?.uid)
+                        editor.putString("name", "Default User")
+                        editor.putString("email", auth.currentUser?.email)
+                        editor.apply()
+                        profileViewModel.updateUserProfile(
+                            User(
+                                auth.currentUser?.uid!!,
+                                "Default User",
+                                0,
+                                "Male",
+                                0f,
+                                0f,
+                                ""
+                            )
+                        )
                         navigateToMainActivity()
                     } else {
                         showToast(task.exception?.message ?: "Login failed. Please try again.")
@@ -105,6 +134,22 @@ class SigninActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
+                val editor = sharedPreferences.edit()
+                editor.putString("uid", auth.currentUser?.uid)
+                editor.putString("name", auth.currentUser?.displayName)
+                editor.putString("email", auth.currentUser?.email)
+                editor.apply()
+                profileViewModel.updateUserProfile(
+                    User(
+                        auth.currentUser?.uid!!,
+                        auth.currentUser?.displayName!!,
+                        0,
+                        "Male",
+                        0f,
+                        0f,
+                        ""
+                    )
+                )
                 navigateToMainActivity()
             } else {
                 showToast(task.exception?.message ?: "Authentication failed. Please try again.")

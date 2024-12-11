@@ -20,9 +20,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
-        sharedPreferences = requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        sharedPreferences = requireActivity().getSharedPreferences("Eatwise", Context.MODE_PRIVATE)
 
-        binding.username.text = sharedPreferences.getString("username", "User Default")
+        binding.username.text = sharedPreferences.getString("name", "")
 
         setupAdapter()
     }

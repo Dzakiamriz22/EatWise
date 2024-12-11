@@ -1,34 +1,52 @@
 package com.example.eatwise.activity
 
 import android.app.DatePickerDialog
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.eatwise.R
+import com.example.eatwise.data.User
+import com.example.eatwise.data.repository.UserRepository
 import com.example.eatwise.databinding.ActivityEditBinding
+import com.example.eatwise.network.ApiClient
+import com.example.eatwise.ui.profile.ProfileViewModel
+import com.example.eatwise.util.DateHelper
+import com.example.eatwise.viewmodel.UserViewModelFactory
+import okhttp3.logging.LoggingEventListener
 import java.util.*
 
 class EditActivity : AppCompatActivity(R.layout.activity_edit) {
 
     private val binding by viewBinding(ActivityEditBinding::bind)
+    private lateinit var sharedPreferences:SharedPreferences
     private var selectedGoal: String? = null
     private var selectedBirthday: String? = null
     private var selectedGender: String? = null
+    private val profileViewModel by lazy {
+        val factory = UserViewModelFactory(UserRepository(ApiClient.apiService))
+        ViewModelProvider(this,factory)[ProfileViewModel::class.java]
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Setup Birthday, Goal, and Gender interactions
+        sharedPreferences = getSharedPreferences("Eatwise", MODE_PRIVATE)
         setupBirthdayPicker()
         setupGoalDropdown()
         setupGenderDropdown()
+        profileViewModel.getUserProfile(sharedPreferences.getString("uid", "")!!)
+        setupObserver()
 
         // Handle Save button click
         binding.btnSave.setOnClickListener {
             if (isInputValid()) {
                 saveData()
+                Toast.makeText(this, "Akun berhasil terupdate", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "All fields must be filled!", Toast.LENGTH_SHORT).show()
             }
@@ -44,7 +62,7 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-                selectedBirthday = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                selectedBirthday = "$selectedYear-${selectedMonth + 1}-$selectedDay"
                 binding.resultBirthday.text = selectedBirthday
             }, year, month, day).apply {
                 // Customize DatePickerDialog style to match the app theme
@@ -105,6 +123,41 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
         val birthday = selectedBirthday
         val goal = selectedGoal
 
-        Toast.makeText(this, "Data saved successfully! Username: $username, Gender: $gender, Birthday: $birthday, Goal: $goal", Toast.LENGTH_SHORT).show()
+        profileViewModel.editUserProfile(sharedPreferences.getString("uid", "")!!, User(
+            sharedPreferences.getString("uid","")!!,
+            username,
+            DateHelper.calculateAge(birthday!!),
+            gender!!,
+            0f,
+            0f,
+            goal!!
+        ))
+
+        val editor = sharedPreferences.edit()
+        editor.putString("name", username)
+        editor.apply()
+    }
+
+    private fun setupObserver() {
+        profileViewModel.userProfile.observe(this) { userProfile ->
+            if (userProfile.name.isEmpty()) {
+                binding.resultUsername.setText(sharedPreferences.getString("name", ""))
+            } else {
+                binding.resultUsername.setText(userProfile.name)
+            }
+            binding.resultGender.text = userProfile.gender
+            binding.resultBirthday.text = userProfile.age.toString()
+            binding.resultGoal.text = userProfile.eat_goal
+
+            selectedGender = userProfile.gender
+            selectedBirthday = userProfile.age.toString()
+            selectedGoal = userProfile.eat_goal
+        }
+
+        profileViewModel.exception.observe(this) { exception ->
+            if (exception) {
+                Toast.makeText(this, "Exception occurred", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
