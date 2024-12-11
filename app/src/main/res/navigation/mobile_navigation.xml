@@ -12,12 +12,6 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_monitoring"
-        android:name="com.example.eatwise.ui.monitoring.MonitoringFragment"
-        android:label="@string/title_monitoring"
-        tools:layout="@layout/fragment_monitoring" />
-
-    <fragment
         android:id="@+id/navigation_camera"
         android:name="com.example.eatwise.ui.camera.CameraFragment"
         android:label="@string/title_camera"
