@@ -35,6 +35,7 @@ viewpager2 = "1.1.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
 activity = "1.9.3"
+firebaseDatabaseKtx = "21.0.0"
 
 [libraries]
 # CameraX Libraries
@@ -91,6 +92,7 @@ play-services-auth = { module = "com.google.android.gms:play-services-auth", ver
 ucrop = { module = "com.github.yalantis:ucrop", version.ref = "ucrop" }
 viewbindingpropertydelegate-noreflection = { module = "com.github.kirich1409:viewbindingpropertydelegate-noreflection", version.ref = "viewbindingpropertydelegateNoreflection" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -39,7 +39,7 @@
         app:layout_constraintTop_toBottomOf="@id/iv_logo">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_login_username"
+            android:id="@+id/ed_username"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/fredoka_medium"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_username">
 
         <com.example.eatwise.ui.authentication.EmailInput
-            android:id="@+id/ed_login_email"
+            android:id="@+id/ed_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/fredoka_medium"
@@ -88,7 +88,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_email_input">
 
         <com.example.eatwise.ui.authentication.PasswordInput
-            android:id="@+id/ed_login_password"
+            android:id="@+id/ed_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/fredoka_medium"
@@ -139,7 +139,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_confirm_password_input">
 
         <TextView
-            android:id="@+id/tv_login_label"
+            android:id="@+id/tv_signup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_green"
@@ -160,35 +160,6 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_google"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_login_container">
-
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:src="@drawable/google" />
-
-        <Button
-            android:id="@+id/signInButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/blue"
-            android:fontFamily="@font/fredoka_medium"
-            android:paddingHorizontal="12dp"
-            android:text="Sign up with Google"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:orientation="horizontal"
@@ -203,10 +174,10 @@
             android:gravity="center"
             android:textColor="@color/green"
             android:textSize="16sp"
-            android:text="Apakah kamu sudah mempunyai akun? " />
+            android:text="Apakah kamu sudah mempunyai akun ?" />
 
         <TextView
-            android:id="@+id/btn_register_label"
+            android:id="@+id/tv_signin"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:fontFamily="@font/fredoka_medium"
