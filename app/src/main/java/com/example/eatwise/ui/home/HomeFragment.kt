@@ -24,7 +24,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
         sharedPreferences = requireActivity().getSharedPreferences("Eatwise", Context.MODE_PRIVATE)
 
+        // Set default username if it's not saved
         binding.username.text = sharedPreferences.getString("name", "User Default")
+
+        // Initialize default values for weight, height, and BMI
+        val defaultWeight = 0f
+        val defaultHeight = 0f
+        sharedPreferences.edit().apply {
+            putFloat("weight", defaultWeight)
+            putFloat("height", defaultHeight)
+            apply()
+        }
 
         setupAdapter()
         setupAutoCalculate()
@@ -71,8 +81,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     @SuppressLint("SetTextI18n")
     private fun updateBMIAndRecommendations() {
-        val weight = sharedPreferences.getFloat("weight", 65f)
-        val height = sharedPreferences.getFloat("height", 1.75f)
+        val weight = sharedPreferences.getFloat("weight", 0f)
+        val height = sharedPreferences.getFloat("height", 0f)
 
         val bmi = calculateBMI(weight, height)
         val bmiDescription = getBMIDescription(bmi)
@@ -85,7 +95,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun calculateBMI(weight: Float, height: Float): Float {
-        return weight / (height * height)
+        return if (height > 0) {
+            weight / (height * height)
+        } else {
+            0f // If height is 0, return BMI as 0
+        }
     }
 
     private fun getBMIDescription(bmi: Float): String {
@@ -93,7 +107,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             bmi < 18.5 -> "Underweight"
             bmi in 18.5..24.9 -> "Normal weight"
             bmi in 25.0..29.9 -> "Overweight"
-            else -> "Obesity"
+            bmi >= 30 -> "Obesity"
+            else -> "-" // Default case
         }
     }
 
