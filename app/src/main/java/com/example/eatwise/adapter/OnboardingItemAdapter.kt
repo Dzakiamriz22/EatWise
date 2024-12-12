@@ -9,37 +9,36 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.eatwise.R
 import com.example.eatwise.data.OnboardingItem
 
-class OnboardingItemAdapter(private val onboardingItem: List<OnboardingItem>) :
+class OnboardingItemAdapter(private val onboardingItems: List<OnboardingItem>) :
     RecyclerView.Adapter<OnboardingItemAdapter.OnboardingItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OnboardingItemViewHolder {
-        return OnboardingItemViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_onboarding,
-                parent,
-                false
-            )
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.item_onboarding,
+            parent,
+            false
         )
+        return OnboardingItemViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: OnboardingItemViewHolder, position: Int) {
-        holder.bind(onboardingItem[position])
+        holder.bind(onboardingItems[position])
     }
 
     override fun getItemCount(): Int {
-        return onboardingItem.size
+        return onboardingItems.size
     }
 
     inner class OnboardingItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val ivOnboardingImage = view.findViewById<ImageView>(R.id.ivImage)
-        private val tvOnboardingTitle = view.findViewById<TextView>(R.id.tvTitle)
-        private val tvOnboardingDescription = view.findViewById<TextView>(R.id.tvDesc)
+        private val imageView: ImageView = view.findViewById(R.id.ivImage)
+        private val titleTextView: TextView = view.findViewById(R.id.tvTitle)
+        private val descriptionTextView: TextView = view.findViewById(R.id.tvDesc)
 
         fun bind(onboardingItem: OnboardingItem) {
-            ivOnboardingImage.setImageResource(onboardingItem.ivImage)
-            tvOnboardingTitle.text = onboardingItem.tvTitle
-            tvOnboardingDescription.text = onboardingItem.tvDesc
+            imageView.setImageResource(onboardingItem.ivImage)
+            titleTextView.text = onboardingItem.tvTitle
+            descriptionTextView.text = onboardingItem.tvDesc
         }
     }
 }

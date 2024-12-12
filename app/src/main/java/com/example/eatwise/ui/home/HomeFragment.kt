@@ -102,25 +102,21 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             bmi < 18.5 -> listOf(
                 "Carbohydrates: 300g",
                 "Proteins: 70g",
-                "Sugars: 40g",
                 "Calories: 2500 kcal"
             )
             bmi in 18.5..24.9 -> listOf(
                 "Carbohydrates: 250g",
                 "Proteins: 60g",
-                "Sugars: 30g",
                 "Calories: 2000 kcal"
             )
             bmi in 25.0..29.9 -> listOf(
                 "Carbohydrates: 200g",
                 "Proteins: 50g",
-                "Sugars: 20g",
                 "Calories: 1800 kcal"
             )
             else -> listOf(
                 "Carbohydrates: 150g",
                 "Proteins: 40g",
-                "Sugars: 15g",
                 "Calories: 1500 kcal"
             )
         }

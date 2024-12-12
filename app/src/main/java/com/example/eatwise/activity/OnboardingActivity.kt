@@ -24,7 +24,7 @@ class OnboardingActivity : AppCompatActivity() {
             setContentView(R.layout.activity_onboarding)
             initializeOnboarding()
         } else {
-            navigateToSignin()
+            navigateToSignIn()
         }
     }
 
@@ -47,18 +47,18 @@ class OnboardingActivity : AppCompatActivity() {
             listOf(
                 OnboardingItem(
                     ivImage = R.drawable.hero,
-                    tvTitle = "Selamat Datang di EatWise",
-                    tvDesc = "Bersama EatWise, langkah pertama menuju hidup sehat lebih mudah! Mulailah perjalanan kesehatan Anda dengan alat cerdas untuk memahami kebutuhan nutrisi Anda."
+                    tvTitle = "Welcome to EatWise",
+                    tvDesc = "With EatWise, taking the first step towards a healthy lifestyle is easier! Start your health journey with smart tools to understand your nutritional needs."
                 ),
                 OnboardingItem(
                     ivImage = R.drawable.hero,
-                    tvTitle = "Analisis Nutrisi Real-Time",
-                    tvDesc = "Gunakan teknologi AI canggih kami untuk memindai makanan Anda dan dapatkan informasi kalori serta nutrisi secara instan!"
+                    tvTitle = "Real-Time Nutrition Analysis",
+                    tvDesc = "Use our advanced AI technology to scan your meals and instantly receive calorie and nutritional information!"
                 ),
                 OnboardingItem(
                     ivImage = R.drawable.hero,
-                    tvTitle = "Rekomendasi Gizi Personal",
-                    tvDesc = "Dapatkan saran nutrisi yang disesuaikan dengan kebutuhan dan tujuan kesehatan Anda, dari menurunkan berat badan hingga meningkatkan vitalitas."
+                    tvTitle = "Personalized Nutrition Recommendations",
+                    tvDesc = "Get nutrition advice tailored to your needs and health goals, from weight loss to enhanced vitality."
                 )
             )
         )
@@ -80,39 +80,40 @@ class OnboardingActivity : AppCompatActivity() {
             if (onboardingViewPager.currentItem + 1 < onboardingItemAdapter.itemCount) {
                 onboardingViewPager.currentItem += 1
             } else {
-                navigateToSignin()
+                navigateToSignIn()
             }
         }
 
         findViewById<Button>(R.id.btnSkip).setOnClickListener {
-            navigateToSignin()
+            navigateToSignIn()
         }
     }
 
-    private fun navigateToSignin() {
+    private fun navigateToSignIn() {
         setOnboardingShown()
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, SigninActivity::class.java))
         finish()
     }
 
     private fun setupIndicators() {
         indicatorsContainer = findViewById(R.id.indicator)
         val indicators = arrayOfNulls<ImageView>(onboardingItemAdapter.itemCount)
-        val layoutParams: LinearLayout.LayoutParams =
-            LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-        layoutParams.setMargins(9, 0, 8, 0)
+        val layoutParams = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        ).apply { setMargins(9, 0, 8, 0) }
 
         for (i in indicators.indices) {
             indicators[i] = ImageView(applicationContext)
-            indicators[i]?.let {
-                it.setImageDrawable(
+            indicators[i]?.apply {
+                setImageDrawable(
                     ContextCompat.getDrawable(
                         applicationContext,
                         R.drawable.indicator_inactive
                     )
                 )
-                it.layoutParams = layoutParams
-                indicatorsContainer.addView(it)
+                this.layoutParams = layoutParams
+                indicatorsContainer.addView(this)
             }
         }
     }
@@ -121,20 +122,12 @@ class OnboardingActivity : AppCompatActivity() {
         val childCount = indicatorsContainer.childCount
         for (i in 0 until childCount) {
             val imageView = indicatorsContainer.getChildAt(i) as ImageView
-            if (i == position) {
-                imageView.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        applicationContext,
-                        R.drawable.indicator_active
-                    )
+            imageView.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext,
+                    if (i == position) R.drawable.indicator_active else R.drawable.indicator_inactive
                 )
-            } else {
-                imageView.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        applicationContext, R.drawable.indicator_inactive
-                    )
-                )
-            }
+            )
         }
     }
 }
