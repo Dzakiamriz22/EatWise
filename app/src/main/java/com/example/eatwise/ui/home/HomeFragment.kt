@@ -1,4 +1,3 @@
-// Updated HomeFragment.kt
 package com.example.eatwise.ui.home
 
 import android.content.Context
@@ -7,7 +6,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -98,31 +96,40 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun getRecommendations(bmi: Float): List<String> {
-        return when {
+        val recommendations = when {
             bmi < 18.5 -> listOf(
                 "Carbohydrates: 300g",
                 "Proteins: 70g",
-                "Fats: 50g",
+                "Sugars: 40g",
                 "Calories: 2500 kcal"
             )
             bmi in 18.5..24.9 -> listOf(
                 "Carbohydrates: 250g",
                 "Proteins: 60g",
-                "Fats: 40g",
+                "Sugars: 30g",
                 "Calories: 2000 kcal"
             )
             bmi in 25.0..29.9 -> listOf(
                 "Carbohydrates: 200g",
                 "Proteins: 50g",
-                "Fats: 30g",
+                "Sugars: 20g",
                 "Calories: 1800 kcal"
             )
             else -> listOf(
                 "Carbohydrates: 150g",
                 "Proteins: 40g",
-                "Fats: 20g",
+                "Sugars: 15g",
                 "Calories: 1500 kcal"
             )
         }
+
+        val dailyWater = when {
+            bmi < 18.5 -> "Water: 3.5 liters/day"
+            bmi in 18.5..24.9 -> "Water: 3 liters/day"
+            bmi in 25.0..29.9 -> "Water: 2.5 liters/day"
+            else -> "Water: 2 liters/day"
+        }
+
+        return recommendations + dailyWater
     }
 }
