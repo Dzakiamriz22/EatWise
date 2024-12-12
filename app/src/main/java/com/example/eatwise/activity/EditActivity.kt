@@ -117,19 +117,44 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
         val birthday = selectedBirthday
         val goal = selectedGoal
 
-        profileViewModel.editUserProfile(sharedPreferences.getString("uid", "")!!, User(
-            sharedPreferences.getString("uid","")!!,
-            username,
-            DateHelper.calculateAge(birthday!!),
-            gender!!,
-            0f,
-            0f,
-            goal!!
-        ))
+        if (username.isEmpty()) {
+            Toast.makeText(this, "Username cannot be empty!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (gender.isNullOrEmpty()) {
+            Toast.makeText(this, "Please select a gender!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (birthday.isNullOrEmpty()) {
+            Toast.makeText(this, "Please select a birthday!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        if (goal.isNullOrEmpty()) {
+            Toast.makeText(this, "Please select a goal!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        profileViewModel.editUserProfile(
+            sharedPreferences.getString("uid", "")!!,
+            User(
+                sharedPreferences.getString("uid", "")!!,
+                username,
+                DateHelper.calculateAge(birthday),
+                gender,
+                0f,
+                0f,
+                goal
+            )
+        )
 
         val editor = sharedPreferences.edit()
         editor.putString("name", username)
         editor.apply()
+
+        Toast.makeText(this, "Profile successfully updated!", Toast.LENGTH_SHORT).show()
     }
 
     private fun setupObserver() {
@@ -154,5 +179,4 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
             }
         }
     }
-
 }
