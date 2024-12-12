@@ -16,4 +16,5 @@
     <string name="tips_description">tips description</string>
     <string name="height">Height</string>
     <string name="label">Label</string>
+    <string name="serving">Per : 100 grams</string>
 </resources>

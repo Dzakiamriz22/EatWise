@@ -45,9 +45,23 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/fredoka_semibold"
             app:layout_constraintStart_toStartOf="@id/imageView"
             app:layout_constraintEnd_toEndOf="@id/imageView"
             app:layout_constraintTop_toBottomOf="@id/imageView"/>
+
+        <TextView
+            android:id="@+id/serving_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/serving"
+            android:textColor="@color/black"
+            android:fontFamily="@font/fredoka_regular"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="@id/image_label"
+            app:layout_constraintEnd_toEndOf="@id/image_label"
+            app:layout_constraintTop_toBottomOf="@id/image_label"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_calories"
