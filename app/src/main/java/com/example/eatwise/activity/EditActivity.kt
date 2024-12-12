@@ -42,7 +42,11 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
         profileViewModel.getUserProfile(sharedPreferences.getString("uid", "")!!)
         setupObserver()
 
-        // Handle Save button click
+        // Back button functionality
+        binding.actionImage.setOnClickListener {
+            finish() // Ends the activity and navigates back
+        }
+
         binding.btnSave.setOnClickListener {
             if (isInputValid()) {
                 saveData()
@@ -160,4 +164,5 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
             }
         }
     }
+
 }

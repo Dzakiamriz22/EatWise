@@ -31,7 +31,7 @@ class HomeAdapter : ListAdapter<String, HomeAdapter.HomeViewHolder>(DiffCallback
             return when {
                 recommendation.contains("Carbohydrates", true) -> R.drawable.bg_carbs
                 recommendation.contains("Proteins", true) -> R.drawable.bg_protein
-                recommendation.contains("Fats", true) -> R.drawable.bg_fruit
+                recommendation.contains("Sugars", true) -> R.drawable.bg_fruit
                 recommendation.contains("Calories", true) -> R.drawable.bg_calories
                 recommendation.contains("Water", true) -> R.drawable.bg_water
                 else -> R.drawable.bg_water
