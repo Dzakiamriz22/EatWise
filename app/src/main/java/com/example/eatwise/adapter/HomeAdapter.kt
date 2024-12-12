@@ -22,7 +22,6 @@ class HomeAdapter : ListAdapter<String, HomeAdapter.HomeViewHolder>(DiffCallback
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(recommendation: String) {
-            // Menampilkan rekomendasi pada TextView dengan id `name`
             binding.name.text = recommendation
         }
     }
