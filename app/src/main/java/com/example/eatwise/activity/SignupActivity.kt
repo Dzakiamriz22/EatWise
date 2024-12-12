@@ -18,16 +18,13 @@ class SignupActivity : AppCompatActivity() {
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        // Initialize Firebase Authentication
         auth = FirebaseAuth.getInstance()
 
-        // Navigate to SigninActivity when "Sign in" text is clicked
         binding?.tvSignin?.setOnClickListener {
             startActivity(Intent(this, SigninActivity::class.java))
             finish()
         }
 
-        // Handle signup button click
         binding?.tvSignup?.setOnClickListener { registerUser() }
     }
 
@@ -40,11 +37,9 @@ class SignupActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password!!)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        // User created successfully
                         Toast.makeText(this, "User account created successfully", Toast.LENGTH_SHORT).show()
                         finish()
                     } else {
-                        // User creation failed
                         Toast.makeText(this, "User account not created. Try again later", Toast.LENGTH_SHORT).show()
                     }
                 }

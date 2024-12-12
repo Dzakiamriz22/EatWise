@@ -1,6 +1,5 @@
 package com.example.eatwise.ui.profile
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -29,31 +28,25 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Inisialisasi FirebaseAuth
         auth = FirebaseAuth.getInstance()
         sharedPreferences = requireActivity().getSharedPreferences("Eatwise", AppCompatActivity.MODE_PRIVATE)
 
-        // Inisialisasi GoogleSignInClient
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-        // Logout
         binding.logout.setOnClickListener {
             auth.signOut()
 
-            // Logout dari Google
             googleSignInClient.signOut().addOnCompleteListener {
-                // Setelah logout, arahkan ke SigninActivity
                 val intent = Intent(requireContext(), SigninActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
             }
         }
 
-        // Setup navigasi menggunakan CardView
         val cardViewMap = mapOf(
             R.id.edit to EditActivity::class.java,
             R.id.aboutme to AboutmeActivity::class.java,

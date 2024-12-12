@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eatwise.data.NutritionItem
 import com.example.eatwise.databinding.ItemResultBinding
-import com.example.eatwise.network.PredictionResponse
 
 class ResultAdapter : ListAdapter<NutritionItem, ResultAdapter.ResultViewHolder>(DiffCallback()) {
 
@@ -23,10 +22,7 @@ class ResultAdapter : ListAdapter<NutritionItem, ResultAdapter.ResultViewHolder>
     class ResultViewHolder(private val binding: ItemResultBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: NutritionItem) {
-            // Set the nutrition name (e.g., "Calories")
             binding.name.text = item.name
-
-            // Set the nutrition value (e.g., "175 cm")
             binding.nutrientValue.text = item.value.toString()
         }
     }

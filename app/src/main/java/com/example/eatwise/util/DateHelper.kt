@@ -16,7 +16,7 @@ object DateHelper {
         var age = todayCalendar.get(Calendar.YEAR) - birthCalendar.get(Calendar.YEAR)
 
         if (todayCalendar.get(Calendar.DAY_OF_YEAR) < birthCalendar.get(Calendar.DAY_OF_YEAR)) {
-            age-- // Jika hari dalam tahun ini belum melewati ulang tahun, kurangi umur
+            age--
         }
 
         return age
