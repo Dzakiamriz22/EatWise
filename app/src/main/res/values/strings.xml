@@ -17,7 +17,6 @@
     <string name="height">Height</string>
     <string name="label">Label</string>
     <string name="serving">Per : 100 grams</string>
-=======
     <string name="hello">Hello,</string>
     <string name="bmi">BMI: XX.XX</string>
     <string name="bmi_description">BMI Description</string>
@@ -73,4 +72,8 @@
     <string name="content_5">Absolutely! The app is designed with an intuitive interface to be accessible to users of all ages and backgrounds.</string>
     <string name="_6">6. Is my personal data safe with EatWise?</string>
     <string name="content_6">Yes, we take your privacy seriously. All data is securely stored and used solely to enhance your experience.</string>
+    <string name="result">Result</string>
+    <string name="displayed_image">Displayed Image</string>
+    <string name="nutrition">Magnesium</string>
+    <string name="percen">75%</string>
 </resources>

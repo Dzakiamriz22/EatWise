@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -15,24 +16,30 @@
         android:orientation="horizontal"
         android:paddingVertical="16dp"
         android:gravity="center_vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="UseCompoundDrawables">
+
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:contentDescription="@string/todo"
             android:src="@drawable/camera_black" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Camera"
+            android:text="@string/title_camera"
             android:textColor="@color/black"
             android:fontFamily="@font/fredoka_semibold"
             android:textSize="24sp"
             android:paddingStart="8dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
     </LinearLayout>
 
-    <!-- Camera Preview -->
     <androidx.camera.view.PreviewView
         android:id="@+id/camera_preview"
         android:layout_width="0dp"
@@ -44,7 +51,6 @@
         app:layout_constraintBottom_toTopOf="@id/camera_buttons"
         app:layout_constraintDimensionRatio="H,16:9" />
 
-    <!-- Camera Buttons -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/camera_buttons"
         android:layout_width="match_parent"
@@ -54,52 +60,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Camera Button Background -->
         <View
             android:id="@+id/camera_button_bg"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@drawable/circle_grey"
+            android:background="@drawable/circle_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Camera Button -->
         <ImageView
             android:id="@+id/camera_button"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/camera_black"
-            android:contentDescription="open_camera"
+            android:contentDescription="@string/todo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/green" />
 
-        <!-- Left Button Background -->
         <View
             android:id="@+id/left_button_bg"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/circle_grey"
+            android:background="@drawable/circle_white"
             app:layout_constraintEnd_toStartOf="@id/camera_button_bg"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
         <ImageView
             android:id="@+id/gallery_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:contentDescription="open_gallery"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:contentDescription="@string/todo"
             android:src="@drawable/baseline_image_24"
             app:layout_constraintEnd_toEndOf="@id/left_button_bg"
             app:layout_constraintStart_toStartOf="@id/left_button_bg"
             app:layout_constraintTop_toTopOf="@id/left_button_bg"
             app:layout_constraintBottom_toBottomOf="@id/left_button_bg"
             app:tint="@color/green" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

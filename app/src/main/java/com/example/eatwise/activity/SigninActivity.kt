@@ -35,7 +35,6 @@ class SigninActivity : AppCompatActivity() {
         ViewModelProvider(this,factory)[ProfileViewModel::class.java]
     }
 
-    // Launcher for Google Sign-In
     private val googleSignInLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -47,28 +46,23 @@ class SigninActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialize ViewBinding
         binding = ActivitySigninBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences("Eatwise", MODE_PRIVATE)
 
-        // Initialize FirebaseAuth
         auth = FirebaseAuth.getInstance()
 
-        // Configure Google Sign-In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        // Check if user is already logged in
         if (auth.currentUser != null) {
             navigateToMainActivity()
         }
 
-        // Set up click listeners
         binding.tvSignup.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
@@ -188,6 +182,5 @@ class SigninActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        // ViewBinding tidak perlu di-set null di Kotlin modern
     }
 }

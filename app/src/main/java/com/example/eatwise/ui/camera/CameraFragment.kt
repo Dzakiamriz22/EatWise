@@ -53,16 +53,10 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
         super.onViewCreated(view, savedInstanceState)
 
         cameraExecutor = Executors.newSingleThreadExecutor()
-
-        // Request Camera Permission
         requestPermissionLauncher.launch(Manifest.permission.CAMERA)
-
-        // Gallery Button Click Listener
         binding.galleryButton.setOnClickListener {
             openGallery()
         }
-
-        // Camera Button Click Listener
         binding.cameraButton.setOnClickListener {
             capturePhoto()
         }

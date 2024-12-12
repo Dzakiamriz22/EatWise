@@ -22,12 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mAuth = FirebaseAuth.getInstance()
         val user = mAuth.currentUser
-//        if (user == null) {
-//            val intent = Intent(this, SigninActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//            return
-//        }
 
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)

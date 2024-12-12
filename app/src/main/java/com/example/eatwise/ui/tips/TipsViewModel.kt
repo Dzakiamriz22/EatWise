@@ -11,7 +11,6 @@ class TipsViewModel : ViewModel() {
     private val _tipsList = MutableLiveData<List<Article>>()
     val tipsList: LiveData<List<Article>> = _tipsList
 
-    // Add MutableLiveData for loading state
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
@@ -29,7 +28,6 @@ class TipsViewModel : ViewModel() {
                 _tipsList.postValue(articleList)
             } catch (e: Exception) {
                 Log.e("TipsViewModel", "Error fetching articles", e)
-                // Consider adding error handling
                 _tipsList.postValue(emptyList())
             } finally {
                 _isLoading.value = false

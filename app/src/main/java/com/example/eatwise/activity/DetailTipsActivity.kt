@@ -24,13 +24,11 @@ class DetailTipsActivity : AppCompatActivity() {
             insets
         }
 
-        // Retrieve data from intent
         val tipTitle = intent.getStringExtra("TIP_TITLE") ?: "No Title"
         val tipContent = intent.getStringExtra("TIP_CONTENT") ?: "No Content"
         val tipImageUrl = intent.getStringExtra("TIP_IMAGE_URL") ?: ""
         val timestamp = intent.getStringExtra("TIP_TIMESTAMP") ?: "No Timestamp"
 
-        // Bind data to views
         val titleTextView = findViewById<TextView>(R.id.tv_title)
         val contentTextView = findViewById<TextView>(R.id.tv_content)
         val timestampTextView = findViewById<TextView>(R.id.tv_timestamp)

@@ -1,5 +1,6 @@
 package com.example.eatwise.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -21,9 +22,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedPreferences = requireActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        sharedPreferences = requireActivity().getSharedPreferences("Eatwise", Context.MODE_PRIVATE)
 
-        binding.username.text = sharedPreferences.getString("username", "User Default")
+        binding.username.text = sharedPreferences.getString("name", "User Default")
 
         setupAdapter()
         setupAutoCalculate()
@@ -49,7 +50,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
                 if (weightInput.isNotEmpty() && heightInput.isNotEmpty()) {
                     val weight = weightInput.toFloat()
-                    val height = heightInput.toFloat() / 100 // Convert to meters
+                    val height = heightInput.toFloat() / 100
 
                     sharedPreferences.edit().apply {
                         putFloat("weight", weight)
@@ -68,9 +69,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.etHeight.addTextChangedListener(textWatcher)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateBMIAndRecommendations() {
-        val weight = sharedPreferences.getFloat("weight", 65f) // Default: 65 kg
-        val height = sharedPreferences.getFloat("height", 1.75f) // Default: 1.75 m (175 cm)
+        val weight = sharedPreferences.getFloat("weight", 65f)
+        val height = sharedPreferences.getFloat("height", 1.75f)
 
         val bmi = calculateBMI(weight, height)
         val bmiDescription = getBMIDescription(bmi)

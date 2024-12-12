@@ -3,7 +3,6 @@ package com.example.eatwise.activity
 import android.app.DatePickerDialog
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,8 +16,7 @@ import com.example.eatwise.network.ApiClient
 import com.example.eatwise.ui.profile.ProfileViewModel
 import com.example.eatwise.util.DateHelper
 import com.example.eatwise.viewmodel.UserViewModelFactory
-import okhttp3.logging.LoggingEventListener
-import java.util.*
+import java.util.Calendar
 
 class EditActivity : AppCompatActivity(R.layout.activity_edit) {
 
@@ -42,9 +40,8 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
         profileViewModel.getUserProfile(sharedPreferences.getString("uid", "")!!)
         setupObserver()
 
-        // Back button functionality
         binding.actionImage.setOnClickListener {
-            finish() // Ends the activity and navigates back
+            finish()
         }
 
         binding.btnSave.setOnClickListener {
@@ -58,7 +55,6 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
     }
 
     private fun setupBirthdayPicker() {
-        // Handle DatePickerDialog for selecting birthday
         binding.resultBirthday.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -69,14 +65,12 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
                 selectedBirthday = "$selectedYear-${selectedMonth + 1}-$selectedDay"
                 binding.resultBirthday.text = selectedBirthday
             }, year, month, day).apply {
-                // Customize DatePickerDialog style to match the app theme
                 setTitle("Select Birthday")
             }.show()
         }
     }
 
     private fun setupGoalDropdown() {
-        // Customize PopupMenu for selecting goal
         binding.resultGoal.setOnClickListener {
             val popupMenu = PopupMenu(this, binding.resultGoal)
             val goals = listOf("Lose weight", "Maintain weight", "Gain weight")
@@ -88,14 +82,12 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
                     true
                 }
             }
-            // Customize PopupMenu appearance (Background and Text Color)
             popupMenu.setForceShowIcon(true)
             popupMenu.show()
         }
     }
 
     private fun setupGenderDropdown() {
-        // Customize PopupMenu for selecting gender
         binding.resultGender.setOnClickListener {
             val popupMenu = PopupMenu(this, binding.resultGender)
             val genders = listOf("Male", "Female")
@@ -107,14 +99,12 @@ class EditActivity : AppCompatActivity(R.layout.activity_edit) {
                     true
                 }
             }
-            // Customize PopupMenu appearance (Background and Text Color)
             popupMenu.setForceShowIcon(true)
             popupMenu.show()
         }
     }
 
     private fun isInputValid(): Boolean {
-        // Validate if all fields are filled
         return !binding.resultUsername.text.isNullOrEmpty() &&
                 !binding.resultGender.text.isNullOrEmpty() &&
                 !selectedBirthday.isNullOrEmpty() &&
