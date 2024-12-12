@@ -95,6 +95,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
             override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                 val savedUri = Uri.fromFile(photoFile)
                 Log.d("CameraFragment", "Photo captured: $savedUri")
+                showProcessingMessage()
                 sendImageToApi(savedUri)
             }
 
@@ -121,10 +122,24 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 result.data?.data?.let { imageUri ->
+                    showProcessingMessage()
                     sendImageToApi(imageUri)
                 }
             }
         }
+
+    private fun showProcessingMessage() {
+        requireActivity().runOnUiThread {
+            binding.progressBar.visibility = View.VISIBLE
+            Toast.makeText(requireContext(), "Please wait, processing image...", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun hideProcessingMessage() {
+        requireActivity().runOnUiThread {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -135,6 +150,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
         val context = requireContext()
         val file = getFileFromUri(context, imageUri) ?: run {
             Toast.makeText(context, "Invalid image file", Toast.LENGTH_SHORT).show()
+            hideProcessingMessage()
             return
         }
 
@@ -171,6 +187,8 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
             } catch (e: Exception) {
                 Toast.makeText(context, "Failed to send image: ${e.message}", Toast.LENGTH_SHORT).show()
                 Log.e("CameraFragment", "Error sending image", e)
+            } finally {
+                hideProcessingMessage()
             }
         }
     }
