@@ -115,16 +115,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <!-- Gallery Button -->
         <ImageView
             android:id="@+id/gallery_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="open_gallery"
+            android:src="@drawable/baseline_image_24"
             app:layout_constraintEnd_toEndOf="@id/left_button_bg"
             app:layout_constraintStart_toStartOf="@id/left_button_bg"
             app:layout_constraintTop_toTopOf="@id/left_button_bg"
             app:layout_constraintBottom_toBottomOf="@id/left_button_bg"
-            app:tint="@color/black" />
+            app:tint="@color/green" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

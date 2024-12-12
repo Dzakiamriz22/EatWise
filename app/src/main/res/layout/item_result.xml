@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -49,6 +48,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
+                android:id="@+id/nutrient_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="32sp"
@@ -56,14 +56,6 @@
                 android:text="75%"
                 android:textColor="@color/black"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textAlignment="textEnd"
-                android:fontFamily="@font/fredoka_medium"
-                android:text="/hari"
-                android:textColor="@color/black"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
