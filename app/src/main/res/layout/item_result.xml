@@ -51,19 +51,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="32sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/fredoka_semibold"
                 android:text="75%"
                 android:textColor="@color/black"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textAlignment="textEnd"
-                android:fontFamily="@font/fredoka_medium"
-                android:text="/hari"
-                android:textColor="@color/black"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

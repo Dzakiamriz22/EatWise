@@ -18,10 +18,17 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.eatwise.R
 import com.example.eatwise.activity.ResultActivity
 import com.example.eatwise.databinding.FragmentCameraBinding
+import com.example.eatwise.network.ApiClient
+import com.google.gson.Gson
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -94,11 +101,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
             override fun onImageSaved(output: ImageCapture.OutputFileResults) {
                 val savedUri = Uri.fromFile(photoFile)
                 Log.d("CameraFragment", "Photo captured: $savedUri")
-
-                // Start ResultActivity to display the captured photo
-                val intent = Intent(requireContext(), ResultActivity::class.java)
-                intent.putExtra("imageUri", savedUri.toString())
-                startActivity(intent)
+                sendImageToApi(savedUri)
             }
 
             override fun onError(exception: ImageCaptureException) {
@@ -124,9 +127,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 result.data?.data?.let { imageUri ->
-                    val intent = Intent(requireContext(), ResultActivity::class.java)
-                    intent.putExtra("imageUri", imageUri.toString())
-                    startActivity(intent)
+                    sendImageToApi(imageUri)
                 }
             }
         }
@@ -135,5 +136,61 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
         super.onDestroyView()
         cameraExecutor.shutdown()
     }
-}
 
+    private fun sendImageToApi(imageUri: Uri) {
+        val context = requireContext()
+        val file = getFileFromUri(context, imageUri) ?: run {
+            Toast.makeText(context, "Invalid image file", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val multipartBody = MultipartBody.Part.createFormData("image", file.name, requestBody)
+
+        lifecycleScope.launch {
+            try {
+                val response = ApiClient.apiService.uploadImage(multipartBody)
+
+                if (response.isSuccessful) {
+                    val predictionResponse = response.body()
+
+                    if (predictionResponse != null) {
+                        if (predictionResponse.image_label == "Unknown") {
+                            Toast.makeText(
+                                context,
+                                "No recognizable food item detected.",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        } else {
+                            val intent = Intent(context, ResultActivity::class.java).apply {
+                                putExtra("imageUri", imageUri.toString())
+                                putExtra("predictionResponse", Gson().toJson(predictionResponse))
+                            }
+                            startActivity(intent)
+                        }
+                    } else {
+                        Toast.makeText(context, "Received empty prediction response.", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(context, "Failed to upload image: ${response.message()}", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(context, "Failed to send image: ${e.message}", Toast.LENGTH_SHORT).show()
+                Log.e("CameraFragment", "Error sending image", e)
+            }
+        }
+    }
+
+    private fun getFileFromUri(context: Context, uri: Uri): File? {
+        val contentResolver = context.contentResolver
+        val fileName = "temp_${System.currentTimeMillis()}.jpg"
+        val tempFile = File(context.cacheDir, fileName)
+
+        contentResolver.openInputStream(uri)?.use { inputStream ->
+            tempFile.outputStream().use { outputStream ->
+                inputStream.copyTo(outputStream)
+            }
+        }
+        return if (tempFile.exists()) tempFile else null
+    }
+}
